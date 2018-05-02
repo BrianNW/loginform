@@ -1,6 +1,58 @@
 <?php
 
 
+if( isset($POST['login'] ) ) {
+
+// Validate the form data
+function validateFormData($formData) {
+  $formData = trim( stripslashes( htmlspecialchars( $formData)));
+  return $formData;
+  }
+
+$formUser = validateFormData($_POST['username']);
+$formPass = validateFormData($_POST['password']);
+
+// Connect to database
+include('connection.php');
+
+// Create a SQL query
+$query = "SELECT username, email, password FROM users WHERE username='$formUser'";
+
+// Store the result
+$result = mysqli_query($conn, $query);
+
+// Verify if result is returned
+if(mysqli_num_rows($result) > 0 ) {
+
+  // Store basic user data in variables
+  while( $row = mysqli_fetch_assoc($result) ) {
+    $user = $row['username'];
+    $email = $row['email'];
+    $hashPass = $row['password'];
+  }
+
+  // verify hashed password with typed password
+  if(password_verify($formPass, $hashedPass)) {
+    // correct login details
+    // start session
+    session_start();
+
+    // store data in SESSION variables
+    $_SESSION['loggedInUser'] = $user;
+    $_SESSION['loggedInEmail'] = $email;
+
+    header("Location: profile.php");
+  }else {
+    $loginError = "<div class='alert alert-danger'> Wrong username / password combination. Please try again. </div>";
+  }
+}else { //there are no results in the database
+  $loginError = "<div class='alert alert-danger'> No such user in database. Please try again. <a class='close' data-dismiss='alert'> &times; </a> </div>";
+}
+
+  // close the mysql connection
+  mysqli_close($conn);
+
+}
 
 
 ?>
@@ -32,6 +84,8 @@
         <div class="container">
             <h1>Login</h1>
             <p class="lead">Use this form to log in to your account</p>
+
+            <?php echo $loginError ; ?>
 
             <form class="form-inline" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post">
 
