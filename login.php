@@ -85,7 +85,10 @@ if(mysqli_num_rows($result) > 0 ) {
             <h1>Login</h1>
             <p class="lead">Use this form to log in to your account</p>
 
-            <?php echo $loginError ; ?>
+            <?php if(isset($loginError)){
+                    echo $loginError;
+                    }
+            ?>
 
             <form class="form-inline" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post">
 
