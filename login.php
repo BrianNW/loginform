@@ -1,3 +1,9 @@
+<?php
+
+
+
+
+?>
 
 <!DOCTYPE html>
 
@@ -28,6 +34,16 @@
             <p class="lead">Use this form to log in to your account</p>
 
             <form class="form-inline" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post">
+
+              <div class="form-group">
+                <label class="sr-only" for="login-username">Username</label>
+                <input type="text" class="form-control" id="login-username" name="username" placeholder="username">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="login-password">Password</label>
+                <input type="text" class="form-control" id="login-password" name="password" placeholder="password">
+              </div>
+              <button type="submit" class="btn btn-default" name="login"> Login! </button>
 
             </form>
 
