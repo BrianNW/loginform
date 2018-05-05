@@ -1,7 +1,7 @@
 <?php
 
 
-if( isset($POST['login'] ) ) {
+if( isset($_POST['login'] ) ) {
 
 // Validate the form data
 function validateFormData($formData) {
@@ -31,23 +31,29 @@ if(mysqli_num_rows($result) > 0 ) {
     $hashPass = $row['password'];
   }
 
-  // verify hashed password with typed password
-  if(password_verify($formPass, $hashedPass)) {
-    // correct login details
-    // start session
-    session_start();
+    // verify hashed password with typed password
+    if(password_verify($formPass, $hashedPass)) {
+      // correct login details
+      // start session
+      session_start();
 
-    // store data in SESSION variables
-    $_SESSION['loggedInUser'] = $user;
-    $_SESSION['loggedInEmail'] = $email;
+      // store data in SESSION variables
+      $_SESSION['loggedInUser'] = $user;
+      $_SESSION['loggedInEmail'] = $email;
 
-    header("Location: profile.php");
-  }else {
-    $loginError = "<div class='alert alert-danger'> Wrong username / password combination. Please try again. </div>";
-  }
-}else { //there are no results in the database
-  $loginError = "<div class='alert alert-danger'> No such user in database. Please try again. <a class='close' data-dismiss='alert'> &times; </a> </div>";
-}
+      header("Location: profile.php");
+
+    } else {
+
+      $loginError = "<div class='alert alert-danger'> Wrong username / password combination. Please try again. </div>";
+
+      }
+} else { //there are no results in the database
+
+    $loginError = "<div class='alert alert-danger'> No such user in database. Please try again. <a class='close' data-dismiss='alert'> &times; </a>
+    </div>";
+
+    }
 
   // close the mysql connection
   mysqli_close($conn);
@@ -85,9 +91,8 @@ if(mysqli_num_rows($result) > 0 ) {
             <h1>Login</h1>
             <p class="lead">Use this form to log in to your account</p>
 
-            <?php if(isset($loginError)){
-                    echo $loginError;
-                    }
+            <?php //if(isset($loginError)) { echo $loginError; }
+            echo $loginError;
             ?>
 
             <form class="form-inline" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post">
