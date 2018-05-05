@@ -13,6 +13,7 @@
   if (!$conn) {
     die( "Connection failed: " . mysqli_connect_error() );
   }
-  echo "Connected successfully";
+  // Remove comment below to debug connection test
+  // echo "Connected successfully";
 
  ?>

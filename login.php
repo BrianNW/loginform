@@ -3,6 +3,7 @@
 
 if( isset($_POST['login'] ) ) {
 
+
 // Validate the form data
 function validateFormData($formData) {
   $formData = trim( stripslashes( htmlspecialchars( $formData)));
@@ -31,6 +32,7 @@ if(mysqli_num_rows($result) > 0 ) {
     $hashPass = $row['password'];
   }
 
+  // Hash the password, using test pw in db
   $hashedPass = password_hash("bobsmith", PASSWORD_DEFAULT);
   // echo $hashedPass;
 
@@ -94,8 +96,8 @@ if(mysqli_num_rows($result) > 0 ) {
             <h1>Login</h1>
             <p class="lead">Use this form to log in to your account</p>
 
-            <?php //if(isset($loginError)) { echo $loginError; }
-            echo $loginError;
+            <?php if(isset($loginError)) { echo $loginError; }
+
             ?>
 
             <form class="form-inline" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post">

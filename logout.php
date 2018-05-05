@@ -11,12 +11,12 @@ if(isset($_COOKIE[session_name()])) {
 session_unset();
 
 //destroy the session
-session_destroy();
+// session_destroy();
 
-echo "You've been logged out! See you next time. <br>";
+echo "<h1> You've been logged out! See you next time. <br> </h1>";
 
 // log back in
-echo "<p><a href='login.php'> Log back in</a></p>";
+echo "<p><a href='login.php'> Log back in</a></p> ";
 
 
 
