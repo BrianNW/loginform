@@ -16,7 +16,7 @@ $formPass = validateFormData($_POST['password']);
 include('connection.php');
 
 // Create a SQL query
-$query = "SELECT username, email, password FROM users WHERE username='$formUser'";
+$query = "SELECT username, password FROM users WHERE username='$formUser'";
 
 // Store the result
 $result = mysqli_query($conn, $query);
@@ -27,9 +27,12 @@ if(mysqli_num_rows($result) > 0 ) {
   // Store basic user data in variables
   while( $row = mysqli_fetch_assoc($result) ) {
     $user = $row['username'];
-    $email = $row['email'];
+    // $email = $row['email'];
     $hashPass = $row['password'];
   }
+
+  $hashedPass = password_hash("bobsmith", PASSWORD_DEFAULT);
+  // echo $hashedPass;
 
     // verify hashed password with typed password
     if(password_verify($formPass, $hashedPass)) {
@@ -105,6 +108,12 @@ if(mysqli_num_rows($result) > 0 ) {
                 <label class="sr-only" for="login-password">Password</label>
                 <input type="text" class="form-control" id="login-password" name="password" placeholder="password">
               </div>
+
+
+              <?php
+
+              ?>
+
               <button type="submit" class="btn btn-default" name="login"> Login! </button>
 
             </form>
