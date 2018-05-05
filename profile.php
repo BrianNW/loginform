@@ -31,7 +31,11 @@
             <h1>Profile Page</h1>
             <p class="lead">Welcome <?php echo $_SESSION['loggedInUser']; ?>! </p>
 
-            <p>Your email address is: <?php echo $_SESSION['loggedInUser']; ?> </p>
+            <!-- <p>Your Username is: -->
+               <?php
+               // echo $_SESSION['loggedInUser'];
+               ?>
+             <!-- </p> -->
 
             <p><a href="logout.php" class="btn btn-danger btn-sm">Log out</a></p>
 
