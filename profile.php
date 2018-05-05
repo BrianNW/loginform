@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Profil Page</title>
+        <title>Profile Page</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -28,7 +28,7 @@
 
     <body>
         <div class="container">
-            <h1>Profile Page/h1>
+            <h1>Profile Page</h1>
             <p class="lead">Welcome <?php echo $_SESSION['loggedInUser']; ?>! </p>
 
             <p>Your email address is: <?php echo $_SESSION['loggedInUser']; ?> </p>
